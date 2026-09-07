@@ -10,17 +10,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Paleta */
-  --color-carbon: #201A16;
-  --color-carbon-suave: #2C241E;
-  --color-crema: #F6F1E7;
-  --color-crema-suave: #EFE7D8;
-  --color-ember: #A8342A;
-  --color-ember-oscuro: #7C2620;
-  --color-dorado: #B98A45;
-  --color-texto: #241C17;
-  --color-texto-suave: #6B5F54;
-  --color-borde: #E3D9C6;
+  /* Paleta Madero — Preventa Rosca de Reyes */
+  --color-carbon: #15191D;
+  --color-carbon-suave: #252A2F;
+  --color-crema: #F5F0E8;
+  --color-crema-suave: #EAE3D8;
+  --color-ember: #F15A24;
+  --color-ember-oscuro: #C94418;
+  --color-dorado: #D89A3D;
+  --color-texto: #202428;
+  --color-texto-suave: #62676B;
+  --color-borde: #DDD6CB;
   --color-blanco: #FFFFFF;
 
   /* Tipografía */
