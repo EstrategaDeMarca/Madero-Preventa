@@ -55,7 +55,7 @@ const PRODUCTOS = [
     categoria: "Roscas",
     nombre: "Rosca Gaspar",
     descripcion: "Rosca de dulce de leche y queso.",
-    precio: 220,
+    precio: 420,
     icono: "🥩",
   },
   {
