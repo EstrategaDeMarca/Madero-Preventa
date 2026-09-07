@@ -17,6 +17,7 @@ const SUCURSALES = [
   "Madero",
   "Coacalco",
   "San Marcos",
+   "Tula",
   "Metepec",
   "Sendero",
   "Zaragoza",
