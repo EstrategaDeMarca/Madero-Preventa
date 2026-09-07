@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madero Restaurante — Preventa</title>
+  <meta name="description" content="Ordena tu pedido de Madero Restaurante para recoger en sucursal." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       BARRA DE PROGRESO (se oculta en Inicio y Confirmación vía CSS/JS)
+       ============================================================ -->
+  <nav class="barra-progreso" aria-label="Progreso del pedido">
+    <ol class="progreso__lista">
+      <li class="progreso__paso" data-paso="sucursal">1. Sucursal</li>
+      <li class="progreso__paso" data-paso="productos">2. Productos</li>
+      <li class="progreso__paso" data-paso="carrito">3. Carrito</li>
+      <li class="progreso__paso" data-paso="recogida">4. Recogida</li>
+      <li class="progreso__paso" data-paso="datos">5. Datos</li>
+      <li class="progreso__paso" data-paso="resumen">6. Resumen</li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- ============================================================
+         PANTALLA 0: INICIO
+         ============================================================ -->
+    <section class="pantalla pantalla--activa" data-paso="inicio">
+      <div class="hero">
+        <div class="hero__contenido">
+          <p class="hero__eyebrow">Preventa en línea</p>
+          <h1 class="hero__titulo">Madero Restaurante</h1>
+          <p class="hero__texto">
+            Arma tu pedido con calma desde tu celular o computadora y recógelo
+            listo en la sucursal que elijas, en el horario que más te acomode.
+          </p>
+          <button type="button" class="boton boton--primario boton--grande" data-siguiente="sucursal">
+            Realizar pedido
+          </button>
+          <p class="hero__nota">Sin filas, sin esperas: tú eliges cuándo pasar por tu comida.</p>
+        </div>
+      </div>
+
+      <div class="franja-info">
+        <div class="franja-info__grid">
+          <div class="franja-info__item">
+            <h3>Elige tu sucursal</h3>
+            <p>Nueve sucursales disponibles para recoger tu pedido.</p>
+          </div>
+          <div class="franja-info__item">
+            <h3>Arma tu pedido</h3>
+            <p>Selecciona tus platillos y bebidas favoritas con cantidad exacta.</p>
+          </div>
+          <div class="franja-info__item">
+            <h3>Recoge sin esperar</h3>
+            <p>Escoge fecha y horario de recogida antes de llegar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PANTALLA 1: SUCURSAL
+         ============================================================ -->
+    <section class="pantalla" data-paso="sucursal">
+      <div class="contenedor">
+        <header class="pantalla__encabezado">
+          <p class="pantalla__eyebrow">Paso 1 de 6</p>
+          <h2>¿En qué sucursal vas a recoger?</h2>
+          <p>Selecciona la sucursal más cercana a ti.</p>
+        </header>
+
+        <div class="pantalla__cuerpo">
+          <div class="grid-sucursales" id="lista-sucursales"></div>
+          <p class="sucursal-elegida">
+            Sucursal seleccionada: <strong id="sucursal-elegida-texto">Ninguna seleccionada todavía</strong>
+          </p>
+        </div>
+
+        <div class="pantalla__acciones">
+          <button type="button" class="boton boton--fantasma" data-regresar="inicio">← Regresar</button>
+          <button type="button" class="boton boton--primario" data-siguiente="productos">Continuar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PANTALLA 2: PRODUCTOS
+         ============================================================ -->
+    <section class="pantalla" data-paso="productos">
+      <div class="contenedor">
+        <header class="pantalla__encabezado">
+          <p class="pantalla__eyebrow">Paso 2 de 6</p>
+          <h2>Arma tu pedido</h2>
+          <p>
+            Elige la cantidad de cada producto y presiona "Agregar al pedido".
+            <br />
+            <em>Los productos que ves aquí son de ejemplo y se reemplazarán por el catálogo real.</em>
+          </p>
+        </header>
+
+        <div class="pantalla__cuerpo" id="lista-productos"></div>
+
+        <div class="pantalla__acciones">
+          <button type="button" class="boton boton--fantasma" data-regresar="sucursal">← Regresar</button>
+          <button type="button" class="boton boton--primario" data-siguiente="carrito">Ver mi carrito</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Barra flotante con resumen rápido del carrito, visible en Productos -->
+    <div class="barra-flotante" id="barra-flotante-carrito">
+      <span class="barra-flotante__info">
+        <strong id="barra-flotante-cantidad">0</strong> producto(s) · Subtotal: <span id="barra-flotante-subtotal">$0.00</span>
+      </span>
+      <button type="button" class="boton boton--primario" id="btn-ver-carrito-flotante">Ver carrito</button>
+    </div>
+
+    <!-- ============================================================
+         PANTALLA 3: CARRITO
+         ============================================================ -->
+    <section class="pantalla" data-paso="carrito">
+      <div class="contenedor">
+        <header class="pantalla__encabezado">
+          <p class="pantalla__eyebrow">Paso 3 de 6</p>
+          <h2>Tu carrito</h2>
+          <p>Revisa cantidades antes de continuar. Puedes ajustar o eliminar productos.</p>
+        </header>
+
+        <div class="pantalla__cuerpo">
+          <p class="carrito-vacio" id="carrito-vacio">Tu carrito está vacío todavía.</p>
+
+          <table class="tabla-carrito" id="tabla-carrito">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+                <th>Subtotal</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="tabla-carrito-cuerpo"></tbody>
+          </table>
+
+          <div class="carrito-total-fila">
+            <span>Total:</span>
+            <span id="carrito-total">$0.00</span>
+          </div>
+        </div>
+
+        <div class="pantalla__acciones">
+          <button type="button" class="boton boton--fantasma" data-regresar="productos">← Seguir agregando productos</button>
+          <button type="button" class="boton boton--primario" data-siguiente="recogida">Continuar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PANTALLA 4: RECOGIDA
+         ============================================================ -->
+    <section class="pantalla" data-paso="recogida">
+      <div class="contenedor">
+        <header class="pantalla__encabezado">
+          <p class="pantalla__eyebrow">Paso 4 de 6</p>
+          <h2>¿Cuándo pasas por tu pedido?</h2>
+          <p>Elige la fecha y el horario en que recogerás tu pedido en sucursal.</p>
+        </header>
+
+        <div class="pantalla__cuerpo">
+          <form class="formulario">
+            <div class="campo">
+              <label for="input-fecha">Fecha de recogida</label>
+              <input type="date" id="input-fecha" name="fecha" />
+            </div>
+            <div class="campo">
+              <label for="select-horario">Horario de recogida</label>
+              <select id="select-horario" name="horario">
+                <option value="">Selecciona un horario</option>
+              </select>
+              <small style="color: var(--color-texto-suave);">Horarios de ejemplo, sujetos a confirmación por sucursal.</small>
+            </div>
+          </form>
+        </div>
+
+        <div class="pantalla__acciones">
+          <button type="button" class="boton boton--fantasma" data-regresar="carrito">← Regresar</button>
+          <button type="button" class="boton boton--primario" data-siguiente="datos">Continuar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PANTALLA 5: DATOS DEL CLIENTE
+         ============================================================ -->
+    <section class="pantalla" data-paso="datos">
+      <div class="contenedor">
+        <header class="pantalla__encabezado">
+          <p class="pantalla__eyebrow">Paso 5 de 6</p>
+          <h2>Tus datos de contacto</h2>
+          <p>Los usaremos para confirmar tu pedido y avisarte cuando esté listo.</p>
+        </header>
+
+        <div class="pantalla__cuerpo">
+          <form class="formulario">
+            <div class="campo">
+              <label for="input-nombre">Nombre completo</label>
+              <input type="text" id="input-nombre" name="nombre" placeholder="Ej. Ana Torres" />
+            </div>
+            <div class="campo">
+              <label for="input-telefono">Teléfono</label>
+              <input type="tel" id="input-telefono" name="telefono" placeholder="Ej. 55 1234 5678" />
+            </div>
+            <div class="campo">
+              <label for="input-correo">Correo electrónico</label>
+              <input type="email" id="input-correo" name="correo" placeholder="Ej. ana@correo.com" />
+            </div>
+          </form>
+        </div>
+
+        <div class="pantalla__acciones">
+          <button type="button" class="boton boton--fantasma" data-regresar="recogida">← Regresar</button>
+          <button type="button" class="boton boton--primario" data-siguiente="resumen">Ver resumen</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PANTALLA 6: RESUMEN
+         ============================================================ -->
+    <section class="pantalla" data-paso="resumen">
+      <div class="contenedor">
+        <header class="pantalla__encabezado">
+          <p class="pantalla__eyebrow">Paso 6 de 6</p>
+          <h2>Revisa tu pedido</h2>
+          <p>Confirma que todo esté correcto antes de continuar.</p>
+        </header>
+
+        <div class="pantalla__cuerpo">
+          <div class="tarjeta-resumen">
+            <h3>Sucursal y recogida</h3>
+            <div class="linea-dato"><span>Sucursal</span><span id="resumen-sucursal">—</span></div>
+            <div class="linea-dato"><span>Fecha</span><span id="resumen-fecha">—</span></div>
+            <div class="linea-dato"><span>Horario</span><span id="resumen-horario">—</span></div>
+          </div>
+
+          <div class="tarjeta-resumen">
+            <h3>Productos</h3>
+            <ul id="resumen-productos"></ul>
+            <div class="resumen-total-fila">
+              <span>Total</span>
+              <span id="resumen-total">$0.00</span>
+            </div>
+          </div>
+
+          <div class="tarjeta-resumen">
+            <h3>Datos de contacto</h3>
+            <div class="linea-dato"><span>Nombre</span><span id="resumen-nombre">—</span></div>
+            <div class="linea-dato"><span>Teléfono</span><span id="resumen-telefono">—</span></div>
+            <div class="linea-dato"><span>Correo</span><span id="resumen-correo">—</span></div>
+          </div>
+
+          <p class="aviso-pago">
+            El módulo de pago se agregará más adelante. Por ahora, al continuar
+            solo se genera un número de pedido de referencia.
+          </p>
+        </div>
+
+        <div class="pantalla__acciones">
+          <button type="button" class="boton boton--fantasma" data-regresar="datos">← Regresar</button>
+          <button type="button" class="boton boton--primario boton--grande" id="btn-continuar-pago">Continuar al pago</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PANTALLA 7: CONFIRMACIÓN (SIN PAGO POR AHORA)
+         ============================================================ -->
+    <section class="pantalla" data-paso="confirmacion">
+      <div class="contenedor">
+        <div class="confirmacion">
+          <div class="confirmacion__icono">🧾</div>
+          <h2>¡Tu pedido quedó registrado!</h2>
+          <p>
+            El pago en línea todavía no está disponible: se agregará en una
+            siguiente fase. Por ahora, tu pedido se guardó como referencia
+            con el siguiente número:
+          </p>
+          <div class="confirmacion__numero" id="confirmacion-numero">MAD-000000</div>
+          <p>Presenta este número en tu sucursal el día de la recogida.</p>
+          <button type="button" class="boton boton--secundario" id="btn-nuevo-pedido">Hacer otro pedido</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pie-pagina">
+    Madero Restaurante · Portal de preventa (versión de prototipo)
+  </footer>
+
+  <!-- El orden de los scripts importa: primero los datos, luego la lógica -->
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
