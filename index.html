@@ -163,7 +163,7 @@
     </section>
 
     <!-- ============================================================
-         PANTALLA 4: RECOGIDA
+         PANTALLA 4: RECOLECCIÓN
          ============================================================ -->
     <section class="pantalla" data-paso="recogida">
       <div class="contenedor">
@@ -176,15 +176,16 @@
         <div class="pantalla__cuerpo">
           <form class="formulario">
             <div class="campo">
-              <label for="input-fecha">Fecha de recogida</label>
+              <label for="input-fecha">Fecha de entrega</label>
               <input type="date" id="input-fecha" name="fecha" />
             </div>
             <div class="campo">
-              <label for="select-horario">Horario de recogida</label>
+              <label for="select-horario">Horario de entrega</label>
               <select id="select-horario" name="horario">
                 <option value="">Selecciona un horario</option>
               </select>
-              <small style="color: var(--color-texto-suave);">Horarios de ejemplo, sujetos a confirmación por sucursal.</small>
+              <small style="color: var(--color-texto-suave);">El horario seleccionado tendrá una tolerancia de 30 minutos, 
+                despues de este periodo tu pedido estara sujeto a disponibilidad de la sucursal.</small>
             </div>
           </form>
         </div>
