@@ -529,7 +529,8 @@ function inicializarApp() {
     boton.addEventListener("click", () => irAPaso(boton.dataset.regresar, { validar: false }));
   });
 
-  document.getElementById("btn-carrito-flotante").addEventListener("click", () => {
+  - document.getElementById("btn-ver-carrito-flotante").addEventListener("click", () => {
++ document.getElementById("btn-carrito-flotante").addEventListener("click", () => {
     irAPaso("carrito", { validar: false });
   });
 
