@@ -165,25 +165,61 @@ function renderizarSucursales() {
   const contenedor = document.getElementById("lista-sucursales");
   contenedor.innerHTML = "";
 
-  SUCURSALES.forEach((nombre) => {
-    const boton = document.createElement("button");
-    boton.type = "button";
-    boton.className = "tarjeta-sucursal";
-    boton.textContent = nombre;
-    if (estado.sucursal === nombre) boton.classList.add("tarjeta-sucursal--elegida");
+  const estados = [...new Set(SUCURSALES.map((sucursal) => sucursal.estado))];
 
-    boton.addEventListener("click", () => {
-      estado.sucursal = nombre;
-      guardarEstado();
-      renderizarSucursales();
-      document.getElementById("sucursal-elegida-texto").textContent = nombre;
-    });
+  estados.forEach((nombreEstado) => {
+    const grupo = document.createElement("div");
+    grupo.className = "grupo-sucursales";
 
-    contenedor.appendChild(boton);
+    const tituloEstado = document.createElement("h3");
+    tituloEstado.className = "titulo-estado";
+    tituloEstado.textContent = nombreEstado;
+
+    const grid = document.createElement("div");
+    grid.className = "grid-sucursales-estado";
+
+    SUCURSALES
+      .filter((sucursal) => sucursal.estado === nombreEstado)
+      .forEach((sucursal) => {
+        const boton = document.createElement("button");
+
+        boton.type = "button";
+        boton.className = "tarjeta-sucursal";
+
+        boton.innerHTML = `
+          <span class="tarjeta-sucursal__nombre">${sucursal.nombre}</span>
+          <span class="tarjeta-sucursal__direccion">${sucursal.direccion}</span>
+        `;
+
+        if (estado.sucursal === sucursal.nombre) {
+          boton.classList.add("tarjeta-sucursal--elegida");
+        }
+
+        boton.addEventListener("click", () => {
+          estado.sucursal = sucursal.nombre;
+          guardarEstado();
+          renderizarSucursales();
+
+          document.getElementById("sucursal-elegida-texto").textContent =
+            `${sucursal.nombre} — ${sucursal.direccion}`;
+        });
+
+        grid.appendChild(boton);
+      });
+
+    grupo.appendChild(tituloEstado);
+    grupo.appendChild(grid);
+    contenedor.appendChild(grupo);
   });
 
+  const sucursalActual = SUCURSALES.find(
+    (sucursal) => sucursal.nombre === estado.sucursal
+  );
+
   document.getElementById("sucursal-elegida-texto").textContent =
-    estado.sucursal || "Ninguna seleccionada todavía";
+    sucursalActual
+      ? `${sucursalActual.nombre} — ${sucursalActual.direccion}`
+      : "Ninguna seleccionada todavía";
 }
 
 // -----------------------------------------------------------------------
