@@ -12,16 +12,56 @@
 // SUCURSALES
 // -----------------------------------------------------------------------
 const SUCURSALES = [
-  "Villas",
-  "San Javier",
-  "Madero",
-  "Coacalco",
-  "San Marcos",
-  "Tula",
-  "Metepec",
-  "Sendero",
-  "Zaragoza",
-  "Churubusco",
+  {
+    estado: "Hidalgo",
+    nombre: "Villas",
+    direccion: "Boulevard Nuevo Hidalgo 1607, Pachuca",
+  },
+  {
+    estado: "Hidalgo",
+    nombre: "San Javier",
+    direccion: "Blvd. Valle de San Javier 109, Fracc. Valle de San Javier, 42086 Pachuca de Soto, Hgo.",
+  },
+  {
+    estado: "Hidalgo",
+    nombre: "Madero",
+    direccion: "Prolongación Francisco I. Madero No. 403, Pachuca",
+  },
+  {
+    estado: "Hidalgo",
+    nombre: "Tula",
+    direccion: "Boulevard Tula Iturbe 118-C, Tula",
+  },
+  {
+    estado: "Estado de México",
+    nombre: "Coacalco",
+    direccion: "Av. José López Portillo 60, Coacalco",
+  },
+  {
+    estado: "Estado de México",
+    nombre: "San Marcos",
+    direccion: "Autopista México-Querétaro, Izcalli",
+  },
+  {
+    estado: "Estado de México",
+    nombre: "Metepec",
+    direccion: "Prolongación Guadalupe Victoria 471, Metepec",
+  },
+  {
+    estado: "Estado de México",
+    nombre: "Sendero",
+    direccion: "Blvd. Aeropuerto Miguel Alemán 55, Lerma",
+  },
+  {
+    estado: "Querétaro",
+    nombre: "Zaragoza",
+    direccion: "Av. Ignacio Zaragoza 150, Querétaro",
+  },
+  {
+    estado: "Ciudad de México",
+    nombre: "Churubusco",
+    direccion: "Avenida Río Churubusco #583, Iztapalapa, CDMX",
+  },
 ];
 
 const PRODUCTOS = [
