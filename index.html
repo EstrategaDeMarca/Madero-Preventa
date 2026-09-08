@@ -112,12 +112,15 @@
     </section>
 
     <!-- Barra flotante con resumen rápido del carrito, visible en Productos -->
-    <div class="barra-flotante" id="barra-flotante-carrito">
-      <span class="barra-flotante__info">
-        <strong id="barra-flotante-cantidad">0</strong> producto(s) · Subtotal: <span id="barra-flotante-subtotal">$0.00</span>
-      </span>
-      <button type="button" class="boton boton--primario" id="btn-ver-carrito-flotante">Ver carrito</button>
-    </div>
+   <button
+  type="button"
+  class="carrito-flotante"
+  id="btn-carrito-flotante"
+  aria-label="Ver carrito"
+>
+  <span class="carrito-flotante__icono">🛍️</span>
+  <span class="carrito-flotante__cantidad" id="carrito-flotante-cantidad">0</span>
+</button>
 
     <!-- ============================================================
          PANTALLA 3: CARRITO
